@@ -11,15 +11,15 @@
     <div class="flex gap-5 items-center">
       <RouterLink to="#" class="flex gap-1 items-center">
         <div class=""><img src="/img/cart.svg" alt="" class="w-[18px]" /></div>
-        <b class="text-slate-300 hover:text-slate-400">1205 руб.</b>
+        <b class="text-slate-800 hover:text-slate-400">1205 руб.</b>
       </RouterLink>
       <RouterLink to="#" class="flex gap-1 items-center">
         <div class=""><img src="/img/heart.svg" alt="" class="w-[18px]" /></div>
-        <div class="text-slate-300 hover:text-slate-400">Закладки</div>
+        <div class="text-slate-800 hover:text-slate-400">Закладки</div>
       </RouterLink>
       <RouterLink to="#" class="flex gap-1 items-center">
         <div class=""><img src="/img/profile.svg" alt="" class="w-[18px]" /></div>
-        <div class="text-slate-300 hover:text-slate-400">Профиль</div>
+        <div class="text-slate-800 hover:text-slate-400">Профиль</div>
       </RouterLink>
     </div>
   </header>

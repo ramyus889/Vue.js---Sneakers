@@ -1,9 +1,11 @@
 <script setup>
-import UseMain from '../components/UseMain.vue';
+import UseCardList from '@/components/UseCardList.vue';
+import UseSearch from '@/components/UseSearch.vue';
 </script>
 
 <template>
   <div class="">
-    <UseMain />
+    <UseSearch />
+    <UseCardList />
   </div>
 </template>
