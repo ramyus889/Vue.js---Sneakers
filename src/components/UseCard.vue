@@ -4,7 +4,9 @@ defineProps({
   title: String,
   price: Number,
   isFavorite: Boolean,
-  isAdded: Boolean
+  isAdded: Boolean,
+  onClickAdd: Function,
+  onClickFavorite: Function
 });
 </script>
 <template>
@@ -17,6 +19,7 @@ defineProps({
           :src="!isFavorite ? '/img/like-1.svg' : '/img/like-2.svg'"
           alt=""
           class="absolute top-8 left-8"
+          @click="onClickFavorite"
         />
         <img :src="imageUrl" alt="" class="" />
         <p>{{ title }}</p>
@@ -27,7 +30,7 @@ defineProps({
             <span class="font-bold">{{ price }} ₽</span>
           </div>
 
-          <img :src="!isAdded ? '/img/plus.svg' : '/img/checked.svg'" alt="" />
+          <img @click="onClickAdd" :src="!isAdded ? '/img/plus.svg' : '/img/checked.svg'" alt="" />
         </div>
       </div>
     </div>
