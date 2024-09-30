@@ -15,7 +15,10 @@ import InputText from 'primevue/inputtext';
           class="!bg-white !text-black !rounded-r-none !rounded-l-2xl"
         />
       </IconField>
-      <select class="bg-white text-black cursor-pointer border border-slate-700 rounded-r-2xl px-4">
+      <select
+        @change="$emit('sortBy', $event.target.value)"
+        class="bg-white outline-none text-black cursor-pointer border border-slate-700 rounded-r-2xl px-4 transition"
+      >
         <option value="">По названию</option>
         <option value="">По цене (дешевые)</option>
         <option value="">По цене (дорогие)</option>
