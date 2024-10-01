@@ -8,8 +8,10 @@ defineProps({
 const emit = defineEmits(['addToFavorite', 'addToCart']);
 </script>
 <template>
-  <div class="px-10 pb-10">
-    <div class="grid grid-cols-6 items-center gap-10 mt-10">
+  <div class="sm:px-10 px-5 pb-10 max-[1024px]:flex max-[1024px]:place-content-center">
+    <div
+      class="grid grid-cols-1 min-[1700px]:grid-cols-6 min-[1500px]:grid-cols-5 min-[1280px]:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 items-center gap-10 mt-10"
+    >
       <UseCard
         v-for="item in items"
         :id="item.id"

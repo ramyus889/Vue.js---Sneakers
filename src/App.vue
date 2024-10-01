@@ -115,9 +115,9 @@ provide('cart', { cart, addToCart, removeFromCart });
 <template>
   <div class="">
     <UseHeader :totalPrice="totalPrice" :vatPrice="vatPrice" />
-    <div class="flex justify-between px-10 pt-10">
+    <div class="flex md:flex-row gap-5 flex-col md:justify-between sm:px-10 px-5 pt-10">
       <div class="font-bold text-3xl">Все кроссовки</div>
-      <div class="flex">
+      <div class="flex gap-4 sm:flex-row flex-col sm:place-content-center">
         <IconField>
           <InputIcon class="pi pi-search" />
           <InputText
@@ -125,12 +125,12 @@ provide('cart', { cart, addToCart, removeFromCart });
             v-model="filters.searchQuery"
             placeholder="Search"
             type="text"
-            class="!bg-white !text-black !rounded-r-none !rounded-l-2xl"
+            class="!bg-white !text-black w-full"
           />
         </IconField>
         <select
           @change="onChangeSelect"
-          class="bg-white outline-none text-black cursor-pointer border border-slate-700 rounded-r-2xl px-4 transition"
+          class="bg-white outline-none text-black cursor-pointer border border-slate-700 rounded-xl px-4 max-[640px]:py-3 transition"
         >
           <option value="name">По названию</option>
           <option value="price">По цене (дешевые)</option>

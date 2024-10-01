@@ -14,7 +14,7 @@ defineProps({
   <div class="">
     <div class="">
       <div
-        class="relative border border-slate-200 rounded-3xl max-w-[330px] p-8 cursor-pointer hover:-translate-y-2 transition duration-400 hover:shadow-xl"
+        class="relative border border-slate-200 w-full rounded-3xl md:max-w-[330px] p-8 cursor-pointer hover:-translate-y-2 transition duration-400 hover:shadow-xl"
       >
         <img
           :src="!isFavorite ? '/img/like-1.svg' : '/img/like-2.svg'"
@@ -22,8 +22,10 @@ defineProps({
           class="absolute top-8 left-8"
           @click="onClickFavorite"
         />
-        <img :src="imageUrl" alt="" class="" />
-        <p>{{ title }}</p>
+        <div class="flex place-content-end">
+          <img :src="imageUrl" alt="" class="" />
+        </div>
+        <p class="sm:text-start text-center">{{ title }}</p>
 
         <div class="flex justify-between items-center mt-5">
           <div class="flex flex-col">
