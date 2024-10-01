@@ -1,8 +1,8 @@
-import UseHome from '@/RouterView/UseHome.vue';
+// import UseHome from '@/RouterView/UseHome.vue';
 
-export const routes = [
-  {
-    path: '/',
-    component: UseHome
-  }
-];
+// export const routes = [
+//   {
+//     path: '/',
+//     component: UseHome
+//   }
+// ];

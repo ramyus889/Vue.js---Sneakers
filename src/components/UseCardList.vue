@@ -1,23 +1,11 @@
 <script setup>
 import UseCard from './UseCard.vue';
-// import { inject } from 'vue';
 
 defineProps({
   items: Array
 });
 
-// TODO: прокидывание данных с помощью inject
-
-// const addToFavorite = inject('addToFavorite');
-
-// const onClickFavorite = () => {
-//   const obj = {
-//     ...props,
-//     parentId: props.id
-//   };
-
-//   addToFavorite(obj);
-// };
+const emit = defineEmits(['addToFavorite', 'addToCart']);
 </script>
 <template>
   <div class="px-10 pb-10">
@@ -29,6 +17,8 @@ defineProps({
         :imageUrl="item.imageUrl"
         :title="item.title"
         :price="item.price"
+        :onClickFavorite="() => emit('addToFavorite', item)"
+        :onClickAdd="() => emit('addToCart', item)"
         :isFavorite="item.isFavorite"
         :isAdded="item.isAdded"
       />
