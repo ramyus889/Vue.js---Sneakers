@@ -122,7 +122,7 @@ watch(cart, () => {
 watch(filters, fetchItems);
 </script>
 <template>
-  <div class="flex md:flex-row gap-5 flex-col md:justify-between sm:px-10 px-5 pt-10">
+  <div class="flex md:flex-row gap-5 flex-col md:justify-between sm:px-10 px-5 pt-10 mt-20">
     <div class="font-bold text-3xl">Все кроссовки</div>
     <div class="flex gap-4 sm:flex-row flex-col sm:place-content-center">
       <IconField>

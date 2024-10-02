@@ -25,6 +25,6 @@ onMounted(async () => {
 });
 </script>
 <template>
-  <div class="p-10 text-3xl font-bold">Мои закладки</div>
+  <div class="p-10 text-3xl font-bold mt-20">Мои закладки</div>
   <UseCardList :items="favorites" isFavorites />
 </template>
