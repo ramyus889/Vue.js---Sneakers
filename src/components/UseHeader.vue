@@ -2,8 +2,8 @@
 import Button from 'primevue/button';
 import Drawer from 'primevue/drawer';
 import { ref } from 'vue';
+import InfoBlock from './InfoBlock.vue';
 import UseCartListItem from './UseCartListItem.vue';
-import InfoBlock from './infoBlock.vue';
 
 const emit = defineEmits(['createOrder']);
 
@@ -17,13 +17,13 @@ const visibleRight = ref(false);
 </script>
 <template>
   <header class="flex justify-between items-center px-[40px] py-[20px] border-b border-slate-600">
-    <a href="#" to="/" class="flex gap-2 items-center">
+    <RouterLink to="/" class="flex gap-2 items-center">
       <div class=""><img src="/img/logo.png" alt="" class="w-[40px] h-[40px]" /></div>
       <div class="sm:flex flex-col leading-[18px] hidden">
         <div class="uppercase font-[700] text-[20px]">vue sneakers</div>
         <div class="">Магазин лучших кроссовок</div>
       </div>
-    </a>
+    </RouterLink>
     <div class="flex sm:gap-5 gap-2 items-center">
       <div class="flex justify-center">
         <Drawer
@@ -69,10 +69,10 @@ const visibleRight = ref(false);
           ></Button
         >
       </div>
-      <a href="#" to="#" class="flex gap-1 items-center">
+      <RouterLink to="/favorites" class="flex gap-1 items-center">
         <div class=""><img src="/img/heart.svg" alt="" class="w-[18px]" /></div>
         <div class="text-slate-800 hover:text-slate-400 sm:text-base text-[14px]">Закладки</div>
-      </a>
+      </RouterLink>
     </div>
   </header>
 </template>
