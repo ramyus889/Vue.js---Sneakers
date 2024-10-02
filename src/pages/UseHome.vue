@@ -1,3 +1,11 @@
+<script>
+export default {
+  name: 'UseHome',
+  mounted() {
+    document.title = 'Vue Sneakers';
+  }
+};
+</script>
 <script setup>
 import UseCardList from '@/components/UseCardList.vue';
 import axios from 'axios';

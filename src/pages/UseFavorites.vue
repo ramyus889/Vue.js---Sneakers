@@ -1,3 +1,11 @@
+<script>
+export default {
+  name: 'UseFavorites',
+  mounted() {
+    document.title = 'Vue Sneakers - Favorites';
+  }
+};
+</script>
 <script setup>
 import UseCardList from '@/components/UseCardList.vue';
 import axios from 'axios';
