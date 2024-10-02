@@ -9,8 +9,14 @@ import { computed, onMounted, provide, reactive, ref, watch } from 'vue';
 
 const items = ref([]);
 const cart = ref([]);
+const isCreatingOrder = ref(false);
+
 const totalPrice = computed(() => cart.value.reduce((acc, item) => acc + item.price, 0));
 const vatPrice = computed(() => Math.round((totalPrice.value * 5) / 100));
+
+const cartIsEmpty = computed(() => cart.value.length === 0);
+
+const cartbuttonDisabled = computed(() => isCreatingOrder.value || cartIsEmpty.value);
 
 const filters = reactive({
   sortBy: 'title',
@@ -25,6 +31,24 @@ const addToCart = (item) => {
 const removeFromCart = (item) => {
   cart.value.splice(cart.value.indexOf(item), 1);
   item.isAdded = false;
+};
+
+const createOrder = async () => {
+  try {
+    isCreatingOrder.value = true;
+    const { data } = await axios.post(`https://2fb4a0db868f6dac.mokky.dev/orders`, {
+      items: cart.value,
+      totalPrice: totalPrice.value
+    });
+
+    cart.value = [];
+
+    return data;
+  } catch (err) {
+    console.log(err);
+  } finally {
+    isCreatingOrder.value = false;
+  }
 };
 
 const onClickAddPlus = (item) => {
@@ -104,17 +128,46 @@ const fetchItems = async () => {
 };
 
 onMounted(async () => {
+  const localCart = localStorage.getItem('cart');
+  cart.value = localCart ? JSON.parse(localCart) : [];
+
   await fetchItems();
   await fetchFavorites();
+
+  items.value = items.value.map((item) => ({
+    ...item,
+    isAdded: cart.value.some((cartItem) => cartItem.id === item.id)
+  }));
 });
+
 watch(filters, fetchItems);
+
+watch(cart, () => {
+  items.value = items.value.map((item) => ({
+    ...item,
+    isAdded: false
+  }));
+});
+
+watch(
+  cart,
+  () => {
+    localStorage.setItem('cart', JSON.stringify(cart.value));
+  },
+  { deep: true }
+);
 
 provide('cart', { cart, addToCart, removeFromCart });
 </script>
 
 <template>
   <div class="">
-    <UseHeader :totalPrice="totalPrice" :vatPrice="vatPrice" />
+    <UseHeader
+      :totalPrice="totalPrice"
+      :vatPrice="vatPrice"
+      @createOrder="createOrder"
+      :cartbuttonDisabled="cartbuttonDisabled"
+    />
     <div class="flex md:flex-row gap-5 flex-col md:justify-between sm:px-10 px-5 pt-10">
       <div class="font-bold text-3xl">Все кроссовки</div>
       <div class="flex gap-4 sm:flex-row flex-col sm:place-content-center">

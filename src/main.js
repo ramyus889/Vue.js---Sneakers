@@ -1,5 +1,6 @@
 import './style.css';
 
+import { autoAnimatePlugin } from '@formkit/auto-animate/vue';
 import Aura from '@primevue/themes/aura';
 import { createPinia } from 'pinia';
 import 'primeicons/primeicons.css';
@@ -23,5 +24,6 @@ app.use(PrimeVue, {
 // });
 
 // app.use(router);
+app.use(autoAnimatePlugin);
 app.use(createPinia());
 app.mount('#app');

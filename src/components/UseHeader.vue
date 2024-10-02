@@ -3,10 +3,14 @@ import Button from 'primevue/button';
 import Drawer from 'primevue/drawer';
 import { ref } from 'vue';
 import UseCartListItem from './UseCartListItem.vue';
+import InfoBlock from './infoBlock.vue';
+
+const emit = defineEmits(['createOrder']);
 
 defineProps({
   totalPrice: Number,
-  vatPrice: Number
+  vatPrice: Number,
+  cartbuttonDisabled: Boolean
 });
 
 const visibleRight = ref(false);
@@ -28,22 +32,34 @@ const visibleRight = ref(false);
           header="Корзина"
           class="!bg-white !text-black !w-[360px]"
         >
-          <UseCartListItem />
+          <div v-if="!totalPrice" class="h-[80%] flex items-center">
+            <InfoBlock
+              title="Корзина пустая"
+              description="Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ."
+              imageUrl="/img/package-icon.png"
+            />
+          </div>
+          <div v-else class="">
+            <UseCartListItem />
 
-          <div class="flex flex-col gap-4 mt-5">
-            <div class="flex gap-1">
-              <span>Итого:</span>
-              <div class="flex-1 border-b border-dashed"></div>
-              <b class="">{{ totalPrice }} ₽</b>
+            <div class="flex flex-col gap-4 mt-5">
+              <div class="flex gap-1">
+                <span>Итого:</span>
+                <div class="flex-1 border-b border-dashed"></div>
+                <b class="">{{ totalPrice }} ₽</b>
+              </div>
+              <div class="flex gap-1">
+                <span>Налог 5%:</span>
+                <div class="flex-1 border-b border-dashed"></div>
+                <b class="">{{ vatPrice }} ₽</b>
+              </div>
+              <Button
+                :disabled="cartbuttonDisabled"
+                @click="emit('createOrder')"
+                class="w-full !py-3 mt-4 !rounded-xl font-semibold"
+                >Оформить заказ</Button
+              >
             </div>
-            <div class="flex gap-1">
-              <span>Налог 5%:</span>
-              <div class="flex-1 border-b border-dashed"></div>
-              <b class="">{{ vatPrice }} ₽</b>
-            </div>
-            <Button disabled class="w-full !py-3 mt-4 !rounded-xl font-semibold"
-              >Оформить заказ</Button
-            >
           </div>
         </Drawer>
         <Button @click="visibleRight = true" text="">
