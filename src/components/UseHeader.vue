@@ -1,17 +1,40 @@
 <script setup>
+import axios from 'axios';
 import Button from 'primevue/button';
 import Drawer from 'primevue/drawer';
-import { ref } from 'vue';
+import { computed, inject, ref } from 'vue';
 import InfoBlock from './InfoBlock.vue';
 import UseCartListItem from './UseCartListItem.vue';
 
-const emit = defineEmits(['createOrder']);
+const isCreatingOrder = ref(false);
 
-defineProps({
+const props = defineProps({
   totalPrice: Number,
-  vatPrice: Number,
-  cartbuttonDisabled: Boolean
+  vatPrice: Number
 });
+
+const { cart } = inject('cart');
+
+const createOrder = async () => {
+  try {
+    isCreatingOrder.value = true;
+    const { data } = await axios.post(`https://2fb4a0db868f6dac.mokky.dev/orders`, {
+      items: cart.value,
+      totalPrice: props.totalPrice.value
+    });
+
+    cart.value = [];
+
+    return data;
+  } catch (err) {
+    console.log(err);
+  } finally {
+    isCreatingOrder.value = false;
+  }
+};
+
+const cartIsEmpty = computed(() => cart.value.length === 0);
+const cartbuttonDisabled = computed(() => isCreatingOrder.value || cartIsEmpty.value);
 
 const visibleRight = ref(false);
 </script>
@@ -39,6 +62,7 @@ const visibleRight = ref(false);
               imageUrl="/img/package-icon.png"
             />
           </div>
+
           <div v-else class="">
             <UseCartListItem />
 
@@ -55,7 +79,7 @@ const visibleRight = ref(false);
               </div>
               <Button
                 :disabled="cartbuttonDisabled"
-                @click="emit('createOrder')"
+                @click="createOrder"
                 class="w-full !py-3 mt-4 !rounded-xl font-semibold"
                 >Оформить заказ</Button
               >

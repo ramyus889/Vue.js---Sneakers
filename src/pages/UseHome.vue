@@ -1,6 +1,7 @@
 <script setup>
 import UseCardList from '@/components/UseCardList.vue';
 import axios from 'axios';
+import debounce from 'lodash.debounce';
 import IconField from 'primevue/iconfield';
 import InputIcon from 'primevue/inputicon';
 import InputText from 'primevue/inputtext';
@@ -26,9 +27,9 @@ const onChangeSelect = (event) => {
   filters.sortBy = event.target.value;
 };
 
-const onChangeSearchInput = (event) => {
+const onChangeSearchInput = debounce((event) => {
   filters.searchQuery = event.target.value;
-};
+}, 300);
 
 const fetchFavorites = async () => {
   try {
