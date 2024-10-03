@@ -56,39 +56,38 @@ const visibleFavoriteButton = Boolean(props.onClickAdd);
           </div>
         </div>
       </Dialog>
-      <button @click="visibleModal = true" class="hover:bg-transparent !text-black">
-        <div
-          class="relative border border-slate-200 w-full rounded-3xl md:max-w-[330px] p-8 cursor-pointer hover:-translate-y-2 transition duration-400 hover:shadow-xl"
-        >
-          <img
-            v-if="visibleFavoriteButton"
-            :src="!isFavorite ? '/img/like-1.svg' : '/img/like-2.svg'"
-            alt=""
-            class="absolute top-8 left-8"
-            @click="onClickFavorite"
-          />
+      <div
+        class="relative border border-slate-200 w-full rounded-3xl md:max-w-[330px] p-8 cursor-pointer hover:-translate-y-2 transition duration-400 hover:shadow-xl"
+      >
+        <img
+          v-if="visibleFavoriteButton"
+          :src="!isFavorite ? '/img/like-1.svg' : '/img/like-2.svg'"
+          alt=""
+          class="absolute top-8 left-8"
+          @click="onClickFavorite"
+        />
+        <button @click="visibleModal = true" class="">
           <div class="flex place-content-end">
             <img :src="imageUrl" alt="" class="" />
           </div>
           <p class="sm:text-start text-center">{{ title }}</p>
+        </button>
+        <div class="flex justify-between items-center mt-5">
+          <div class="flex flex-col">
+            <span>Цена:</span>
+            <span class="font-bold">{{ price }} ₽</span>
+          </div>
 
-          <div class="flex justify-between items-center mt-5">
-            <div class="flex flex-col">
-              <span>Цена:</span>
-              <span class="font-bold">{{ price }} ₽</span>
-            </div>
-
-            <div class="flex gap-2">
-              <img
-                v-if="visibleFavoriteButton"
-                @click="onClickAdd"
-                :src="!isAdded ? '/img/plus.svg' : '/img/checked.svg'"
-                alt=""
-              />
-            </div>
+          <div class="flex gap-2">
+            <img
+              v-if="visibleFavoriteButton"
+              @click="onClickAdd"
+              :src="!isAdded ? '/img/plus.svg' : '/img/checked.svg'"
+              alt=""
+            />
           </div>
         </div>
-      </button>
+      </div>
     </div>
   </div>
 </template>
